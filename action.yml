@@ -1,0 +1,56 @@
+name: 'Export GitHub secrets & vars to environment variables & specified file'
+description:
+  'Use this action to export GitHub defined secrets and vars to the runner environment variables and a specified file'
+author: 'jakubcieslik99'
+
+inputs:
+  secrets:
+    required: true
+    description:
+      'JSON representation of the GitHub secrets: ${{ toJSON(secrets) }}, use provided placeholder or a boolean `false` value
+      to skip.'
+  vars:
+    required: true
+    description:
+      'JSON representation of the GitHub vars: ${{ toJSON(vars) }}, use provided placeholder or a boolean `false` value to
+      skip.'
+  hydrate-env:
+    required: false
+    description:
+      'Boolean indicating whether to fill GitHub runner environment variables with the GitHub secrets & vars, default: true.'
+  generate-file:
+    required: false
+    description:
+      'File name to export GitHub secrets & vars to, e.g.: .env, if not provided, will export to .env. If set to false, will
+      not generate the file.'
+  include:
+    required: false
+    description: 'Optional comma-separated list of secrets & vars to fill/export, e.g.: MYSQL_USER, MYSQL_PASSWORD.'
+  exclude:
+    required: false
+    description:
+      'Optional comma-separated list of secrets & vars to skip filling/exporting, e.g.: POSTGRES_USER, POSTGRES_PASSWORD.'
+  override-script-envs:
+    required: false
+    description:
+      'Boolean indicating whether to override existing environment variables defined directly in your GitHub Actions script
+      in case of any match, default: true.'
+  append-script-envs:
+    required: false
+    description:
+      'Optional comma-separated list of GitHub runner environment variables defined directly in your GitHub Actions script to
+      export to the file, e.g.: ENV, DIR.'
+  secrets-prefix:
+    required: false
+    description: 'Optional prefix for the secrets, e.g.: SECRET_, default: no prefix.'
+  vars-prefix:
+    required: false
+    description: 'Optional prefix for the vars, e.g.: VAR_, default: no prefix.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'at-sign'
+  color: 'yellow'
