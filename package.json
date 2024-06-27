@@ -1,6 +1,6 @@
 {
   "name": "secrets-vars-to-env-file-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export GitHub secrets & vars to environment variables & specified file",
   "type": "module",
   "main": "build/index.js",
@@ -8,7 +8,7 @@
     "test": "jest --watchAll",
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
-    "prepare": "rimraf build && pnpm run build && pnpm run package",
+    "prepare:release": "rimraf build && pnpm run build && pnpm run package",
     "lint": "eslint . --ignore-path .gitignore --ext .js,.ts",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\""
   },
