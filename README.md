@@ -37,9 +37,9 @@ Optional comma-separated list of secrets & vars to fill/export, e.g.: `MYSQL_USE
 
 Optional comma-separated list of secrets & vars to skip filling/exporting, e.g.: `POSTGRES_USER, POSTGRES_PASSWORD`.
 
-### `override-script-envs`
+### `overwrite-script-envs`
 
-Boolean indicating whether to override existing environment variables defined directly in your GitHub Actions script in case
+Boolean indicating whether to overwrite existing environment variables defined directly in your GitHub Actions script in case
 of any match, default: `true`.
 
 ### `append-script-envs`
@@ -58,7 +58,7 @@ Optional prefix for the vars, e.g.: `VAR_`, default: _no prefix_.
 ## Example usage
 
 ```yaml
-uses: jakubcieslik99/secrets-vars-to-env-file-action@latest
+uses: jakubcieslik99/secrets-vars-to-env-file-action@main
 with:
   secrets: ${{ toJSON(secrets) }}
   vars: ${{ toJSON(vars) }}
