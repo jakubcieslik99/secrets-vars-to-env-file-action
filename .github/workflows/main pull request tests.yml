@@ -13,6 +13,7 @@ on:
       - '**/*.cjs'
       - '**/*.mjs'
       - '**/*.json'
+      - '**/pnpm-lock.yaml'
       - '!**/package.json'
       - '!**/.eslintrc.json'
       - '!**/.prettierrc.json'
