@@ -26660,6 +26660,23 @@ module.exports = parseParams
 /******/ }
 /******/ 
 /************************************************************************/
+/******/ /* webpack/runtime/define property getters */
+/******/ (() => {
+/******/ 	// define getter functions for harmony exports
+/******/ 	__nccwpck_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/hasOwnProperty shorthand */
+/******/ (() => {
+/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ })();
+/******/ 
 /******/ /* webpack/runtime/compat */
 /******/ 
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
@@ -26668,18 +26685,198 @@ module.exports = parseParams
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(9093);
 
-(async () => {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Work in progress...');
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ build)
+});
+
+// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.10.1/node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(9093);
+;// CONCATENATED MODULE: ./build/classes/KeysManager.js
+
+class KeysManager {
+    type = 'secret';
+    keys = {};
+    get list() {
+        return this.keys;
+    }
+    applyIncludeFilter(includes) {
+        const includesList = includes.map(include => include.trim());
+        if (!includesList.length)
+            return;
+        const modifiedKeys = {};
+        for (const [key, value] of Object.entries(this.keys)) {
+            if (includesList.includes(key)) {
+                modifiedKeys[key] = value;
+                core.info(`Included GitHub ${this.type} "${key}"`);
+            }
+        }
+        if (Object.keys(modifiedKeys).length) {
+            this.keys = modifiedKeys;
+        }
+    }
+    applyExcludeFilter(excludes) {
+        const excludesList = excludes.map(exclude => exclude.trim());
+        excludesList.push('github_token');
+        const modifiedKeys = this.keys;
+        for (const key of Object.keys(this.keys)) {
+            if (excludesList.includes(key)) {
+                delete modifiedKeys[key];
+                key !== 'github_token' && core.info(`Excluded GitHub ${this.type} "${key}"`);
+            }
+        }
+        this.keys = modifiedKeys;
+    }
+    appendKeyPrefix(prefix) {
+        if (!prefix)
+            return;
+        const prefixedKeys = {};
+        for (const [key, value] of Object.entries(this.keys)) {
+            prefixedKeys[`${prefix}${key}`] = value;
+        }
+        this.keys = prefixedKeys;
+        core.info(`Prefixed GitHub ${this.type}s with "${prefix}"`);
+    }
+}
+
+;// CONCATENATED MODULE: ./build/classes/SecretsManager.js
+
+class SecretsManager extends KeysManager {
+    constructor(secretsJson) {
+        super();
+        this.type = 'secret';
+        if (secretsJson !== 'false') {
+            try {
+                this.keys = JSON.parse(secretsJson);
+            }
+            catch (error) {
+                throw new Error('Could not parse GitHub secrets. Make sure you have added the following input to this action: secrets: ${{ toJSON(secrets) }}');
+            }
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./build/classes/VarsManager.js
+
+class VarsManager extends KeysManager {
+    constructor(varsJson) {
+        super();
+        this.type = 'var';
+        if (varsJson !== 'false') {
+            try {
+                this.keys = JSON.parse(varsJson);
+            }
+            catch (error) {
+                throw new Error('Could not parse GitHub vars. Make sure you have added the following input to this action: vars: ${{ toJSON(secrets) }}');
+            }
+        }
+    }
+}
+
+;// CONCATENATED MODULE: external "fs/promises"
+const promises_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs/promises");
+;// CONCATENATED MODULE: ./build/classes/EnvCreator.js
+
+
+class EnvCreator {
+    hydrateRunnerEnv = true;
+    fileName = '.env';
+    overwriteScriptEnvs = true;
+    scriptEnvsToAppend = [];
+    constructor(hydrateRunnerEnv, fileName, overwriteScriptEnvs, appendScriptEnvs) {
+        this.hydrateRunnerEnv = !hydrateRunnerEnv || hydrateRunnerEnv === 'true' ? true : false;
+        this.fileName = fileName === 'false' ? null : fileName ? fileName : '.env';
+        this.overwriteScriptEnvs = !overwriteScriptEnvs || overwriteScriptEnvs === 'true' ? true : false;
+        this.scriptEnvsToAppend = appendScriptEnvs.map(scriptEnv => scriptEnv.trim());
+    }
+    hydrateEnv(keys) {
+        if (!this.hydrateRunnerEnv)
+            return;
+        for (const [key, value] of Object.entries(keys)) {
+            if (process.env[key]) {
+                if (this.overwriteScriptEnvs) {
+                    core.info(`Env variable "${key}" defined in your GitHub Actions script will be overwritten within this GitHub runner env`);
+                }
+                else {
+                    core.info(`Skipped overwriting env variable "${key}" defined in your GitHub Actions script, within this GitHub runner env`);
+                    continue;
+                }
+            }
+            core.exportVariable(key, value);
+            core.info(`Hydrated GitHub runner env with GitHub secret/var "${key}"`);
+        }
+    }
+    async generateEnvFile(keys) {
+        if (!this.fileName)
+            return;
+        const fileContent = [];
+        for (const env of this.scriptEnvsToAppend) {
+            if (!process.env[env])
+                continue;
+            if (keys[env]) {
+                if (this.overwriteScriptEnvs) {
+                    core.info(`Env variable "${env}" defined in your GitHub Actions script will be overwritten when exporting to file`);
+                    continue;
+                }
+                else {
+                    core.info(`Skipped overwriting env variable "${env}" defined in your GitHub Actions script, when exporting to file`);
+                }
+            }
+            fileContent.push([env, process.env[env]]);
+            core.info(`Env variable "${env}" defined in your GitHub Actions script has been added to export to file`);
+        }
+        for (const [key, value] of Object.entries(keys)) {
+            if (fileContent.find(([fileKey]) => fileKey === key))
+                continue;
+            fileContent.push([key, value]);
+            core.info(`GitHub secret/var "${key}" has been added to export to file`);
+        }
+        core.info(`Writing to file "${this.fileName}"...`);
+        await (0,promises_namespaceObject.writeFile)(this.fileName, fileContent.map(([key, value]) => `${key}=${value}`).join('\n'));
+        core.info(`File "${this.fileName}" has been filled and saved successfully`);
+    }
+}
+
+;// CONCATENATED MODULE: ./build/index.js
+
+
+
+
+/* harmony default export */ const build = ((async () => {
+    const secretsJson = core.getInput('secrets', { required: true });
+    const varsJson = core.getInput('vars', { required: true });
+    const includes = core.getInput('include') ? core.getInput('include').split(',') : [];
+    const excludes = core.getInput('exclude') ? core.getInput('exclude').split(',') : [];
+    const secretsPrefix = core.getInput('secrets-prefix');
+    const varsPrefix = core.getInput('vars-prefix');
+    const hydrateRunnerEnv = core.getInput('hydrate-env');
+    const fileName = core.getInput('generate-file');
+    const overwriteScriptEnvs = core.getInput('overwrite-script-envs');
+    const appendScriptEnvs = core.getInput('append-script-envs') ? core.getInput('append-script-envs').split(',') : [];
+    const secretsManager = new SecretsManager(secretsJson);
+    secretsManager.applyIncludeFilter(includes);
+    secretsManager.applyExcludeFilter(excludes);
+    secretsManager.appendKeyPrefix(secretsPrefix);
+    const varsManager = new VarsManager(varsJson);
+    varsManager.applyIncludeFilter(includes);
+    varsManager.applyExcludeFilter(excludes);
+    varsManager.appendKeyPrefix(varsPrefix);
+    const secrets = secretsManager.list;
+    const vars = varsManager.list;
+    const envCreator = new EnvCreator(hydrateRunnerEnv, fileName, overwriteScriptEnvs, appendScriptEnvs);
+    envCreator.hydrateEnv({ ...secrets, ...vars });
+    await envCreator.generateEnvFile({ ...secrets, ...vars });
 })().catch(error => {
     if (error instanceof Error)
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
+        core.setFailed(error.message);
     else
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error);
-});
+        core.setFailed(error);
+}));
 
 })();
 
+var __webpack_exports__default = __webpack_exports__.Z;
+export { __webpack_exports__default as default };
 
 //# sourceMappingURL=index.js.map
