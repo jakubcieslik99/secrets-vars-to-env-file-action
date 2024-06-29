@@ -13,7 +13,8 @@ on:
       - '**/*.cjs'
       - '**/*.mjs'
       - '**/*.json'
-      - '!**/package.json'
+      - '**/pnpm-lock.yaml'
+      #- '!**/package.json'
       - '!**/.eslintrc.json'
       - '!**/.prettierrc.json'
 
@@ -29,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Use latest pnpm
         uses: pnpm/action-setup@master
       - name: Use Node.js ${{ matrix.node-version }}
@@ -41,4 +44,4 @@ jobs:
           pnpm install --frozen-lockfile
       - name: Run e2e tests on staging
         run: |
-          pnpm run test:e2e
+          pnpm run test-e2e

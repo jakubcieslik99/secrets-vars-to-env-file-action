@@ -7,12 +7,12 @@ inputs:
   secrets:
     required: true
     description:
-      'JSON representation of the GitHub secrets: ${{ toJSON(secrets) }}, use provided placeholder or a boolean `false` value
-      to skip.'
+      'JSON representation of the GitHub secrets: $ { { toJSON(secrets) } }, use provided placeholder or a boolean `false`
+      value to skip.'
   vars:
     required: true
     description:
-      'JSON representation of the GitHub vars: ${{ toJSON(vars) }}, use provided placeholder or a boolean `false` value to
+      'JSON representation of the GitHub vars: $ { { toJSON(vars) } }, use provided placeholder or a boolean `false` value to
       skip.'
   hydrate-env:
     required: false
@@ -30,10 +30,10 @@ inputs:
     required: false
     description:
       'Optional comma-separated list of secrets & vars to skip filling/exporting, e.g.: POSTGRES_USER, POSTGRES_PASSWORD.'
-  override-script-envs:
+  overwrite-script-envs:
     required: false
     description:
-      'Boolean indicating whether to override existing environment variables defined directly in your GitHub Actions script
+      'Boolean indicating whether to overwrite existing environment variables defined directly in your GitHub Actions script
       in case of any match, default: true.'
   append-script-envs:
     required: false
