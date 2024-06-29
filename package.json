@@ -6,7 +6,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest --watchAll",
-    "test-e2e": "node --experimental-vm-modules node_modules/jest/bin/jest --testPathPattern=tests/*e2e.test.ts",
+    "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest --testPathPattern=tests/*e2e.test.ts",
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
     "prepare:release": "rimraf build && pnpm run build && pnpm run package",
