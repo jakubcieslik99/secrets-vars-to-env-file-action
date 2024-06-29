@@ -14,7 +14,7 @@ on:
       - '**/*.mjs'
       - '**/*.json'
       - '**/pnpm-lock.yaml'
-      #- '!**/package.json'
+      - '!**/package.json'
       - '!**/.eslintrc.json'
       - '!**/.prettierrc.json'
 
