@@ -1,6 +1,6 @@
 {
   "name": "secrets-vars-to-env-file-action",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Export GitHub secrets & vars to environment variables & specified file",
   "type": "module",
   "main": "build/index.js",
@@ -11,11 +11,12 @@
     "package": "ncc build --source-map --license licenses.txt",
     "prepare:release": "rimraf build && pnpm run build && pnpm run package",
     "lint": "eslint . --ignore-path .gitignore --ext .js,.ts",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\"",
+    "update:all": "corepack up && pnpm update"
   },
   "author": "Jakub Cieślik",
   "license": "MIT",
-  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
+  "packageManager": "pnpm@9.5.0-beta.0+sha512.c2e60e7ed04e459591c982f2760cd8f7d1f48fe1ca4d46ccbbf8377df1eb2d077ace1e9d334b06250dddf23c03b4562858f77992b9a3bb4a93355aefd173df32",
   "dependencies": {
     "@actions/core": "^1.10.1"
   },
@@ -23,8 +24,8 @@
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.9",
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.14.1",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
     "@vercel/ncc": "^0.38.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -32,6 +33,6 @@
     "prettier": "^3.3.2",
     "rimraf": "^5.0.7",
     "ts-jest": "^29.1.5",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   }
 }

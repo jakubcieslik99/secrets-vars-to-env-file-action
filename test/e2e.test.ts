@@ -56,7 +56,7 @@ describe('secrets-vars-to-env-file-action e2e', () => {
 
   test('e2e', async () => {
     try {
-      const { default: index } = await import('../index.js');
+      const { default: index } = await import('../src/index.js');
       await index;
 
       expect(true).toBe(true);
