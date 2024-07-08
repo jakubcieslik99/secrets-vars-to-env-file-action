@@ -50,10 +50,8 @@ jobs:
         id: package_version
         run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
       - name: Create tag release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@main
         with:
-          tag_name: v${{ steps.package_version.outputs.VERSION }}
-          release_name: v${{ steps.package_version.outputs.VERSION }}
+          tag: v${{ steps.package_version.outputs.VERSION }}
+          name: v${{ steps.package_version.outputs.VERSION }}
           body: Release v${{ steps.package_version.outputs.VERSION }}
