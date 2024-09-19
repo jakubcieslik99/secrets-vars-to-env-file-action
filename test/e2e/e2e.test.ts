@@ -1,7 +1,8 @@
+import { describe, beforeAll, beforeEach, afterEach, afterAll, test, expect } from '@jest/globals';
 import fs from 'fs';
 import * as core from '@actions/core';
-import { mockCoreModule } from './mocks/implementations.js';
-import { mockInputs, mockRunnerScriptEnvs } from './mocks/helpers.js';
+import { mockCoreModule } from '../mocks/implementations.js';
+import { mockInputs, mockRunnerScriptEnvs } from '../mocks/helpers.js';
 
 describe('secrets-vars-to-env-file-action e2e', () => {
   let coreModule: typeof core;
@@ -56,7 +57,7 @@ describe('secrets-vars-to-env-file-action e2e', () => {
 
   test('e2e', async () => {
     try {
-      const { default: index } = await import('../src/index.js');
+      const { default: index } = await import('../../src/index.js');
       await index;
 
       expect(true).toBe(true);

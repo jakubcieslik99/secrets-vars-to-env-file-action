@@ -1,4 +1,30 @@
+# main
+.pnpm-store/
 node_modules/
 build/
+
+# .env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# tests
 coverage/
+
+# logs
+logs/
+log/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# temp directory
+.temp/
+.tmp/
+
+# os
 .DS_Store
