@@ -1,4 +1,4 @@
-name: Tests on staging on "main" branch repo pull request
+name: Testing on "main" branch repo opened pull request push
 
 on:
   pull_request_target:
@@ -14,10 +14,13 @@ on:
       - '**/*.mjs'
       - '**/*.json'
       - '**/pnpm-lock.yaml'
-      - '!.github/**'
       - '!**/package.json'
+      - '!.github/**'
+      - '!**/.gitignore'
       - '!**/.eslintrc.json'
       - '!**/.prettierrc.json'
+      - '!**/*.md'
+      - '!**/LICENSE'
 
 jobs:
   test:
@@ -31,8 +34,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: Use latest pnpm
         uses: pnpm/action-setup@master
       - name: Use Node.js ${{ matrix.node-version }}
