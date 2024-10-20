@@ -1,7 +1,7 @@
 import './sourcemap-register.cjs';import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
 /******/ var __webpack_modules__ = ({
 
-/***/ 7167:
+/***/ 2202:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -31,7 +31,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(857));
-const utils_1 = __nccwpck_require__(7027);
+const utils_1 = __nccwpck_require__(7158);
 /**
  * Commands
  *
@@ -103,7 +103,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 7463:
+/***/ 4708:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -141,12 +141,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.platform = exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = exports.markdownSummary = exports.summary = exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(7167);
-const file_command_1 = __nccwpck_require__(6026);
-const utils_1 = __nccwpck_require__(7027);
+const command_1 = __nccwpck_require__(2202);
+const file_command_1 = __nccwpck_require__(5865);
+const utils_1 = __nccwpck_require__(7158);
 const os = __importStar(__nccwpck_require__(857));
 const path = __importStar(__nccwpck_require__(6928));
-const oidc_utils_1 = __nccwpck_require__(4309);
+const oidc_utils_1 = __nccwpck_require__(3458);
 /**
  * The code to exit an action
  */
@@ -431,29 +431,29 @@ exports.getIDToken = getIDToken;
 /**
  * Summary exports
  */
-var summary_1 = __nccwpck_require__(1230);
+var summary_1 = __nccwpck_require__(2175);
 Object.defineProperty(exports, "summary", ({ enumerable: true, get: function () { return summary_1.summary; } }));
 /**
  * @deprecated use core.summary
  */
-var summary_2 = __nccwpck_require__(1230);
+var summary_2 = __nccwpck_require__(2175);
 Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return summary_2.markdownSummary; } }));
 /**
  * Path exports
  */
-var path_utils_1 = __nccwpck_require__(5443);
+var path_utils_1 = __nccwpck_require__(2256);
 Object.defineProperty(exports, "toPosixPath", ({ enumerable: true, get: function () { return path_utils_1.toPosixPath; } }));
 Object.defineProperty(exports, "toWin32Path", ({ enumerable: true, get: function () { return path_utils_1.toWin32Path; } }));
 Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: function () { return path_utils_1.toPlatformPath; } }));
 /**
  * Platform utilities exports
  */
-exports.platform = __importStar(__nccwpck_require__(3835));
+exports.platform = __importStar(__nccwpck_require__(2096));
 //# sourceMappingURL=core.js.map
 
 /***/ }),
 
-/***/ 6026:
+/***/ 5865:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -485,9 +485,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const crypto = __importStar(__nccwpck_require__(6982));
 const fs = __importStar(__nccwpck_require__(9896));
 const os = __importStar(__nccwpck_require__(857));
-const utils_1 = __nccwpck_require__(7027);
+const utils_1 = __nccwpck_require__(7158);
 function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -520,7 +521,7 @@ exports.prepareKeyValueMessage = prepareKeyValueMessage;
 
 /***/ }),
 
-/***/ 4309:
+/***/ 3458:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -537,7 +538,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
 const http_client_1 = __nccwpck_require__(7952);
 const auth_1 = __nccwpck_require__(5916);
-const core_1 = __nccwpck_require__(7463);
+const core_1 = __nccwpck_require__(4708);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -603,7 +604,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 5443:
+/***/ 2256:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -671,7 +672,7 @@ exports.toPlatformPath = toPlatformPath;
 
 /***/ }),
 
-/***/ 3835:
+/***/ 2096:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -771,7 +772,7 @@ exports.getDetails = getDetails;
 
 /***/ }),
 
-/***/ 1230:
+/***/ 2175:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
@@ -1060,7 +1061,7 @@ exports.summary = _summary;
 
 /***/ }),
 
-/***/ 7027:
+/***/ 7158:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -27431,8 +27432,8 @@ __nccwpck_require__.d(__webpack_exports__, {
   A: () => (/* binding */ build)
 });
 
-// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.0/node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(7463);
+// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(4708);
 ;// CONCATENATED MODULE: ./build/classes/KeysManager.js
 
 class KeysManager {
