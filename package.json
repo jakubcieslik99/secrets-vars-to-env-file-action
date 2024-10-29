@@ -1,6 +1,6 @@
 {
   "name": "secrets-vars-to-env-file-action",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Export GitHub secrets & vars to environment variables & specified file",
   "type": "module",
   "main": "build/index.js",
@@ -16,13 +16,13 @@
   },
   "author": "Jakub Cieślik",
   "license": "MIT",
-  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
+  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
   "dependencies": {
     "@actions/core": "^1.11.1"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@types/node": "^20.16.13",
+    "@types/node": "^20.17.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vercel/ncc": "^0.38.2",
