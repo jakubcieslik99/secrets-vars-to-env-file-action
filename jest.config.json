@@ -9,7 +9,7 @@
   "testEnvironment": "node",
   "testMatch": ["**/*.test.ts"],
   "transform": {
-    "^.+\\.(mt|t|cj|j)s$": ["ts-jest", { "useESM": true }]
+    "^.+\\.(mt|t|cj|j)s$": ["ts-jest", { "useESM": true, "isolatedModules": true }]
   },
   "verbose": false
 }
