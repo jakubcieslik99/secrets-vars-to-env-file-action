@@ -27466,7 +27466,7 @@ class KeysManager {
             for (const include of includesList) {
                 if (key === include || (key.startsWith(include) && include.endsWith('_'))) {
                     modifiedKeys[key] = value;
-                    core.info(`Included GitHub ${this.type} "${key}"`);
+                    core.info(`Included GitHub ${this.type} "${key}"${include.endsWith('_') ? ' based on prefix' : ''}`);
                     break;
                 }
             }
