@@ -10,7 +10,7 @@ export default class VarsManager extends KeysManager {
         this.keys = JSON.parse(varsJson);
       } catch (error) {
         throw new Error(
-          'Could not parse GitHub vars. Make sure you have added the following input to this action: vars: ${{ toJSON(secrets) }}',
+          'Could not parse GitHub vars. Make sure you have added the following input to this action: vars: ${{ toJSON(vars) }}',
         );
       }
     }

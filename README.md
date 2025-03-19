@@ -31,7 +31,8 @@ not generate the file.
 
 ### `include`
 
-Optional comma-separated list of secrets & vars to fill/export, e.g.: `MYSQL_USER, MYSQL_PASSWORD`.
+Optional comma-separated list of secrets & vars or prefixes to fill/export, e.g.: `MYSQL_USER, MYSQL_PASSWORD` or
+`MYSQL_USER, VITE_, NODE_`.
 
 ### `exclude`
 
