@@ -17,9 +17,12 @@ export default class KeysManager implements Manager {
     const modifiedKeys: Record<string, string> = {};
 
     for (const [key, value] of Object.entries(this.keys)) {
-      if (includesList.includes(key)) {
-        modifiedKeys[key] = value;
-        core.info(`Included GitHub ${this.type} "${key}"`);
+      for (const include of includesList) {
+        if (key === include || (key.startsWith(include) && include.endsWith('_'))) {
+          modifiedKeys[key] = value;
+          core.info(`Included GitHub ${this.type} "${key}"`);
+          break;
+        }
       }
     }
 
