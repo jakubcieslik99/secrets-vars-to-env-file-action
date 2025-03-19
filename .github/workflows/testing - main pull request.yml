@@ -25,7 +25,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: CI/CD
+    environment: testing
 
     strategy:
       matrix:

@@ -15,7 +15,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: CI/CD
+    environment: testing
 
     strategy:
       matrix:
@@ -41,7 +41,7 @@ jobs:
   release:
     needs: test
     runs-on: ubuntu-latest
-    environment: CI/CD
+    environment: production
 
     steps:
       - name: Checkout
