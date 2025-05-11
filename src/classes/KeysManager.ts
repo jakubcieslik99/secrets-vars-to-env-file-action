@@ -41,7 +41,9 @@ export default class KeysManager implements Manager {
     for (const key of Object.keys(this.keys)) {
       if (excludesList.includes(key)) {
         delete modifiedKeys[key];
-        key !== 'github_token' && core.info(`Excluded GitHub ${this.type} "${key}"`);
+        if (key !== 'github_token') {
+          core.info(`Excluded GitHub ${this.type} "${key}"`);
+        }
       }
     }
 

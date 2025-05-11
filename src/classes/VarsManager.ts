@@ -8,7 +8,7 @@ export default class VarsManager extends KeysManager {
     if (varsJson !== 'false') {
       try {
         this.keys = JSON.parse(varsJson);
-      } catch (error) {
+      } catch (_error) {
         throw new Error(
           'Could not parse GitHub vars. Make sure you have added the following input to this action: vars: ${{ toJSON(vars) }}',
         );
