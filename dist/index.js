@@ -27482,7 +27482,9 @@ class KeysManager {
         for (const key of Object.keys(this.keys)) {
             if (excludesList.includes(key)) {
                 delete modifiedKeys[key];
-                key !== 'github_token' && core.info(`Excluded GitHub ${this.type} "${key}"`);
+                if (key !== 'github_token') {
+                    core.info(`Excluded GitHub ${this.type} "${key}"`);
+                }
             }
         }
         this.keys = modifiedKeys;
@@ -27509,7 +27511,7 @@ class SecretsManager extends KeysManager {
             try {
                 this.keys = JSON.parse(secretsJson);
             }
-            catch (error) {
+            catch (_error) {
                 throw new Error('Could not parse GitHub secrets. Make sure you have added the following input to this action: secrets: ${{ toJSON(secrets) }}');
             }
         }
@@ -27526,7 +27528,7 @@ class VarsManager extends KeysManager {
             try {
                 this.keys = JSON.parse(varsJson);
             }
-            catch (error) {
+            catch (_error) {
                 throw new Error('Could not parse GitHub vars. Make sure you have added the following input to this action: vars: ${{ toJSON(vars) }}');
             }
         }

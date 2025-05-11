@@ -17,28 +17,24 @@ describe('secrets-vars-to-env-file-action e2e', () => {
 
   beforeEach(async () => {
     inputs = {
-      secrets: JSON.stringify({
+      'secrets': JSON.stringify({
         github_token: 'github_token',
         SECRET_1: 'secret_1',
         SECRET_2: 'secret_2',
         ENV_1: 'env_1_overwritten',
       }),
-      vars: 'false',
+      'vars': 'false',
       'hydrate-env': 'true',
       'generate-file': '.test.env',
-      include: 'SECRET_1, ENV_1',
-      exclude: 'SECRET_2',
+      'include': 'SECRET_1, ENV_1',
+      'exclude': 'SECRET_2',
       'overwrite-script-envs': 'true',
       'append-script-envs': 'ENV_1, ENV_3',
       'secrets-prefix': 'S_',
       'vars-prefix': 'V_',
     };
 
-    runnerScriptEnvs = {
-      S_ENV_1: 'env_1',
-      ENV_2: 'env_2',
-      ENV_3: 'env_3',
-    };
+    runnerScriptEnvs = { S_ENV_1: 'env_1', ENV_2: 'env_2', ENV_3: 'env_3' };
 
     mockInputs(coreModule, inputs);
     mockRunnerScriptEnvs(coreModule, runnerScriptEnvs);

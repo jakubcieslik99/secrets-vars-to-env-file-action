@@ -1,6 +1,6 @@
 {
   "name": "secrets-vars-to-env-file-action",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Export GitHub secrets & vars to environment variables & specified file",
   "type": "module",
   "main": "build/index.js",
@@ -10,28 +10,34 @@
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
     "prepare:release": "rimraf build && pnpm run build && pnpm run package",
-    "lint": "eslint . --ignore-path .gitignore --ext .js,.ts",
+    "lint": "eslint .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\"",
     "update:all": "corepack up && pnpm update"
   },
   "author": "Jakub Cieślik",
   "license": "MIT",
-  "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af",
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
   "dependencies": {
     "@actions/core": "^1.11.1"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.8",
+    "@eslint/js": "^9.25.1",
     "@jest/globals": "^29.7.0",
-    "@types/node": "^20.17.24",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/node": "^22.15.17",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vercel/ncc": "^0.38.3",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
     "jest": "^29.7.0",
     "prettier": "^3.5.3",
     "rimraf": "^5.0.10",
-    "ts-jest": "^29.2.6",
-    "typescript": "^5.8.2"
+    "ts-jest": "^29.3.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1"
   }
 }
