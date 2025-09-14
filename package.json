@@ -1,6 +1,6 @@
 {
   "name": "secrets-vars-to-env-file-action",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Export GitHub secrets & vars to environment variables & specified file",
   "type": "module",
   "main": "build/index.js",
@@ -16,7 +16,7 @@
   },
   "author": "Jakub Cieślik",
   "license": "MIT",
-  "packageManager": "pnpm@10.11.1+sha512.e519b9f7639869dc8d5c3c5dfef73b3f091094b0a006d7317353c72b124e80e1afd429732e28705ad6bfa1ee879c1fce46c128ccebd3192101f43dd67c667912",
+  "packageManager": "pnpm@10.16.1+sha512.0e155aa2629db8672b49e8475da6226aa4bdea85fdcdfdc15350874946d4f3c91faaf64cbdc4a5d1ab8002f473d5c3fcedcd197989cf0390f9badd3c04678706",
   "dependencies": {
     "@actions/core": "^1.11.1"
   },
