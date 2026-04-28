@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import Manager from '../interfaces/Manager.js';
+import type Manager from '../interfaces/Manager.js';
 
 export default class KeysManager implements Manager {
   protected type: 'secret' | 'var' = 'secret';

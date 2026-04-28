@@ -5,4 +5,4 @@ interface Manager {
   appendKeyPrefix(prefix: string): void;
 }
 
-export default Manager;
+export type { Manager as default };
