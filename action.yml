@@ -48,7 +48,7 @@ inputs:
     description: 'Optional prefix for the vars, e.g.: VAR_, default: no prefix.'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
 
 branding:
